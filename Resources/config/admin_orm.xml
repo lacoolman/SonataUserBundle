@@ -6,12 +6,12 @@
     <parameters>
         <!-- USER -->
         <parameter key="sonata.user.admin.user.class">Sonata\UserBundle\Admin\Entity\UserAdmin</parameter>
-        <parameter key="sonata.user.admin.user.controller">SonataAdminBundle:CRUD</parameter>
+        <parameter key="sonata.user.admin.user.controller">IronSoftAnalyticsISBundle:Admin\AjaxCRUD</parameter>
         <parameter key="sonata.user.admin.user.translation_domain">SonataUserBundle</parameter>
 
         <!-- GROUP -->
         <parameter key="sonata.user.admin.group.class">Sonata\UserBundle\Admin\Entity\GroupAdmin</parameter>
-        <parameter key="sonata.user.admin.group.controller">SonataAdminBundle:CRUD</parameter>
+        <parameter key="sonata.user.admin.group.controller">IronSoftAnalyticsISBundle:Admin\AjaxCRUD</parameter>
         <parameter key="sonata.user.admin.group.translation_domain">%sonata.user.admin.user.translation_domain%</parameter>
 
         <parameter key="sonata.user.admin.groupname">sonata_user</parameter>
