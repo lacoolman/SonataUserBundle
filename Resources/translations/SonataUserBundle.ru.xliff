@@ -212,27 +212,27 @@
             </trans-unit>
             <trans-unit id="show.label_username">
                 <source>show.label_username</source>
-                <target>show.label_username</target>
+                <target>Имя пользователя</target>
             </trans-unit>
             <trans-unit id="show.label_email">
                 <source>show.label_email</source>
-                <target>show.label_email</target>
+                <target>Электронная почта</target>
             </trans-unit>
             <trans-unit id="show.label_groups">
                 <source>show.label_groups</source>
-                <target>show.label_groups</target>
+                <target>Группы</target>
             </trans-unit>
             <trans-unit id="show.label_date_of_birth">
                 <source>show.label_date_of_birth</source>
-                <target>show.label_date_of_birth</target>
+                <target>Дата рождения</target>
             </trans-unit>
             <trans-unit id="show.label_firstname">
                 <source>show.label_firstname</source>
-                <target>show.label_firstname</target>
+                <target>Имя</target>
             </trans-unit>
             <trans-unit id="show.label_lastname">
                 <source>show.label_lastname</source>
-                <target>show.label_lastname</target>
+                <target>Фамилия</target>
             </trans-unit>
             <trans-unit id="show.label_website">
                 <source>show.label_website</source>
@@ -244,7 +244,7 @@
             </trans-unit>
             <trans-unit id="show.label_gender">
                 <source>show.label_gender</source>
-                <target>show.label_gender</target>
+                <target>Пол</target>
             </trans-unit>
             <trans-unit id="show.label_locale">
                 <source>show.label_locale</source>
@@ -256,7 +256,7 @@
             </trans-unit>
             <trans-unit id="show.label_phone">
                 <source>show.label_phone</source>
-                <target>show.label_phone</target>
+                <target>Телефон</target>
             </trans-unit>
             <trans-unit id="show.label_facebook_uid">
                 <source>show.label_facebook_uid</source>

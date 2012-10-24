@@ -12,6 +12,7 @@
 namespace Sonata\UserBundle\Model;
 
 use FOS\UserBundle\Entity\User as AbstractedUser;
+use Doctrine\Common\Collections\ArrayCollection;
 use Sonata\UserBundle\Model\UserInterface;
 
 /**
@@ -19,6 +20,7 @@ use Sonata\UserBundle\Model\UserInterface;
  */
 abstract class User extends AbstractedUser implements UserInterface
 {
+
     /**
      * @var \DateTime
      */
@@ -128,6 +130,19 @@ abstract class User extends AbstractedUser implements UserInterface
      * @var string
      */
     protected $token;
+
+    protected $inputReports;
+
+    public function addInputReport($report)
+    {
+        $this->inputReports[] = $report;
+        return $this;
+    }
+
+    public function getInputReports()
+    {
+        return $this->inputReports;
+    }
 
     /**
      * Sets the creation date
