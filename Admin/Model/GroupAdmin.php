@@ -38,8 +38,16 @@ class GroupAdmin extends Admin
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
+            ->addIdentifier('id', null, ['label' => '№'])
             ->addIdentifier('name')
             ->add('roles')
+            ->add('_action', 'actions', [
+                'label' => 'Действия',
+                'actions' => [
+    //                    'view' => [],
+                    'edit' => [],
+                ]
+            ])
         ;
     }
 
