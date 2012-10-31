@@ -51,6 +51,14 @@ class GroupAdmin extends Admin
         ;
     }
 
+    protected function configureRoutes(\Sonata\AdminBundle\Route\RouteCollection $collection)
+    {
+        $collection
+            ->remove('create')
+            ->remove('delete')
+        ;
+    }
+
     /**
      * {@inheritdoc}
      */
