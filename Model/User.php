@@ -14,12 +14,16 @@ namespace Sonata\UserBundle\Model;
 use FOS\UserBundle\Entity\User as AbstractedUser;
 use Doctrine\Common\Collections\ArrayCollection;
 use Sonata\UserBundle\Model\UserInterface;
+use IronSoft\Analytics\ISBundle\Entity\SoftDeletable\TraitSoftDeletable;
 
 /**
  * Represents a User model
  */
-abstract class User extends AbstractedUser implements UserInterface
+abstract class User extends AbstractedUser implements UserInterface, \IronSoft\Analytics\ISBundle\Entity\SoftDeletable\SoftDeleteableInterface
 {
+
+    //use TraitSoftDeletable;
+
 
     /**
      * @var \DateTime
@@ -126,12 +130,36 @@ abstract class User extends AbstractedUser implements UserInterface
      */
     protected $gplusData;
 
+    protected $failLoginCount;
+
+    /**
+     * @var bool $deleted
+     */
+    protected $deleted = false;
+
+
+    public function delete() {
+        $this->deleted = true;
+    }
+
+    public function isDeleted() {
+        return $this->deleted;
+    }
+
     /**
      * @var string
      */
     protected $token;
 
     protected $inputReports;
+
+    public function setFailLoginCount($count) {
+        $this->failLoginCount = $count;
+    }
+
+    public function getFailLoginCount() {
+        return $this->failLoginCount;
+    }
 
     public function addInputReport($report)
     {

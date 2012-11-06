@@ -18,7 +18,7 @@
         <field name="locale"       type="string"     column="locale"    length="8"     nullable="true" />
         <field name="timezone"     type="string"     column="timezone"  length="64"    nullable="true" />
         <field name="phone"        type="string"     column="phone"     length="64"    nullable="true" />
-
+        <field name="deleted"      type="boolean"    column="deleted"/>
         <!-- social fields -->
         <field name="facebookUid"     type="string"     column="facebook_uid"  length="255"    nullable="true" />
         <field name="facebookName"    type="string"     column="facebook_name"  length="255"    nullable="true" />
@@ -34,6 +34,7 @@
         <!-- extra security fields -->
         <field name="token"                   type="string" length="255" column="token" nullable="true" />
         <field name="twoStepVerificationCode" type="string" length="255" column="two_step_code" nullable="true" />
+        <field name="failLoginCount" type="integer"  column="fail_login" nullable="true" />
 
         <lifecycle-callbacks>
             <lifecycle-callback type="prePersist" method="prePersist" />
