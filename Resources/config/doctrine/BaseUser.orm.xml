@@ -6,7 +6,7 @@
 
     <mapped-superclass name="Sonata\UserBundle\Entity\BaseUser">
         <field name="createdAt"    type="datetime"   column="created_at" />
-        <field name="updatedAt"    type="datetime"   column="updated_at" />
+        <field name="updatedAt"    type="datetime"   column="updated_at" nullable="true"/>
 
         <!-- Profile fields -->
         <field name="dateOfBirth"  type="datetime"   column="date_of_birth"            nullable="true" />

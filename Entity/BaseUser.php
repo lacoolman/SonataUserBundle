@@ -24,7 +24,7 @@ class BaseUser extends AbstractedUser
     public function prePersist()
     {
         $this->createdAt = new \DateTime;
-        $this->updatedAt = new \DateTime;
+        //$this->updatedAt = new \DateTime;
     }
 
     /**
@@ -32,6 +32,6 @@ class BaseUser extends AbstractedUser
      */
     public function preUpdate()
     {
-        $this->updatedAt = new \DateTime;
+      //  $this->updatedAt = new \DateTime;
     }
 }
