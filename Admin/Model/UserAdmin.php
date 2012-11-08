@@ -12,6 +12,7 @@
 namespace Sonata\UserBundle\Admin\Model;
 
 use Sonata\AdminBundle\Admin\Admin;
+use Sonata\AdminBundle\Validator\ErrorElement;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
@@ -21,9 +22,9 @@ use FOS\UserBundle\Model\UserManagerInterface;
 
 class UserAdmin extends Admin
 {
-    protected $formOptions = array(
-        'validation_groups' => 'Profile'
-    );
+//    protected $formOptions = array(
+//        'validation_groups' => 'Profile'
+//    );
 
     /**
      * {@inheritdoc}
@@ -105,6 +106,25 @@ class UserAdmin extends Admin
         ;
     }
 
+    public function validate(ErrorElement $errorElement, $object)
+    {
+        $errorElement
+            ->with('groups')
+            ->assertSonataModel()
+            ->end()
+            ->with('username')
+            ->assertNotBlank()
+            ->end()
+            ->with('email')
+            ->assertEmail()
+            ->assertNotBlank()
+            ->end()
+            ->with('plainPassword')
+            ->assertNotBlank()
+            ->end()
+        ;
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -115,7 +135,7 @@ class UserAdmin extends Admin
                 ->add('username')
                 ->add('email')
                 ->add('plainPassword', 'text', array('required' => false))
-                ->add('groups', 'sonata_type_model', array('required' => false))
+                ->add('groups', 'sonata_type_model', array('required' => true))
 //                ->add('dateOfBirth', 'date', array('required' => false))
                 ->add('firstname', null, array('required' => false))
                 ->add('lastname', null, array('required' => false))
@@ -136,7 +156,7 @@ class UserAdmin extends Admin
 //                ))
                 ->add('locked', null, array('required' => false))
 //                ->add('expired', null, array('required' => false))
-//                ->add('enabled', null, array('required' => false))
+                ->add('enabled', null, array('required' => false))
 //                ->add('credentialsExpired', null, array('required' => false))
             ;
         }
