@@ -17,10 +17,10 @@ use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
-
+use \IronSoft\Analytics\ISBundle\Admin\AbstractAdmin;
 use FOS\UserBundle\Model\UserManagerInterface;
 
-class UserAdmin extends Admin
+class UserAdmin extends AbstractAdmin
 {
 //    protected $formOptions = array(
 //        'validation_groups' => 'Profile'
@@ -192,4 +192,10 @@ class UserAdmin extends Admin
     {
         return $this->userManager;
     }
+
+    public function getClassnameLabel() {
+        return 'Пользователи';
+    }
+
+    protected $label = 'Пользователи';
 }
