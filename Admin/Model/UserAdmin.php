@@ -107,7 +107,7 @@ class UserAdmin extends AbstractAdmin
     }
 
     public function validate(ErrorElement $errorElement, $object)
-    {
+    {;
         $errorElement
             ->with('groups')
             ->assertSonataModel()
@@ -118,11 +118,13 @@ class UserAdmin extends AbstractAdmin
             ->with('email')
             ->assertEmail()
             ->assertNotBlank()
-            ->end()
-            ->with('plainPassword')
-            ->assertNotBlank()
-            ->end()
-        ;
+            ->end();
+        if (!$object->getId()) {
+            $errorElement
+                ->with('plainPassword')
+                ->assertNotBlank()
+                ->end();
+        }
     }
 
     /**
