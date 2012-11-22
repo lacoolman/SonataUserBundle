@@ -136,7 +136,7 @@ class UserAdmin extends AbstractAdmin
             ->with('Справочник пользователя')
                 ->add('username')
                 ->add('email')
-                ->add('plainPassword', 'text', array('required' => false))
+                ->add('plainPassword', 'password', array('required' => false))
                 ->add('groups', 'sonata_type_model', array('required' => true))
 //                ->add('dateOfBirth', 'date', array('required' => false))
                 ->add('firstname', null, array('required' => false))
