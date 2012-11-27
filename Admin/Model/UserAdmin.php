@@ -19,6 +19,7 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
 use \IronSoft\Analytics\ISBundle\Admin\AbstractAdmin;
 use FOS\UserBundle\Model\UserManagerInterface;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 class UserAdmin extends AbstractAdmin
 {
@@ -132,12 +133,20 @@ class UserAdmin extends AbstractAdmin
      */
     protected function configureFormFields(FormMapper $formMapper)
     {
+        if (!$this->editSelf() && !$this->user->hasRole('ROLE_ADMIN')) {
+            throw new AccessDeniedException();
+        }
         $formMapper
             ->with('Справочник пользователя')
-                ->add('username')
+                ->add('username', null, array('read_only' => !$this->user->hasRole('ROLE_ADMIN')))
                 ->add('email')
-                ->add('plainPassword', 'password', array('required' => false))
-                ->add('groups', 'sonata_type_model', array('required' => true))
+                ->add('plainPassword', 'password', array('required' => false));
+        if ($this->user->hasRole('ROLE_ADMIN')) {
+            $formMapper
+                ->with('Справочник пользователя')
+                ->add('groups', 'sonata_type_model', array('required' => true));
+        }
+        $formMapper
 //                ->add('dateOfBirth', 'date', array('required' => false))
                 ->add('firstname', null, array('required' => false))
                 ->add('lastname', null, array('required' => false))
@@ -149,7 +158,7 @@ class UserAdmin extends AbstractAdmin
                 ->add('phone', null, array('required' => false))
         ;
 
-        if (!$this->getSubject()->hasRole('ROLE_SUPER_ADMIN')) {
+        if (!$this->getSubject()->hasRole('ROLE_SUPER_ADMIN') && $this->user->hasRole('ROLE_ADMIN')) {
             $formMapper
 //                ->add('roles', 'sonata_security_roles', array(
 //                    'expanded' => true,
@@ -199,5 +208,15 @@ class UserAdmin extends AbstractAdmin
         return 'Пользователи';
     }
 
+    private function editSelf() {
+        $this->user = $this->getConfigurationPool()->getContainer()->get('security.context')->getToken()->getUser();
+        return $this->user->getId() == $this->getSubject()->getId();
+    }
+
     protected $label = 'Пользователи';
+
+    /**
+     * @var \Sonata\UserBundle\Entity\BaseUser $user
+     */
+    protected $user;
 }
