@@ -37,7 +37,7 @@ class UserAdmin extends AbstractAdmin
             ->add('email')
             ->add('groups', 'string', ['template' => 'SonataAdminBundle::CRUD/list__groups_filter.html.twig'])
             ->add('enabled')
-            ->add('locked')
+//            ->add('locked')
             ->add('createdAt')
             ->add('_action', 'actions', ['label' => 'Действия',
                 'actions' => [
@@ -62,7 +62,7 @@ class UserAdmin extends AbstractAdmin
         $filterMapper
             ->add('id')
             ->add('username')
-            ->add('locked')
+//            ->add('locked')
             ->add('email')
             ->add('groups')
         ;
@@ -165,7 +165,7 @@ class UserAdmin extends AbstractAdmin
 //                    'multiple' => true,
 //                    'required' => false
 //                ))
-                ->add('locked', null, array('required' => false))
+//                ->add('locked', null, array('required' => false))
 //                ->add('expired', null, array('required' => false))
                 ->add('enabled', null, array('required' => false))
 //                ->add('credentialsExpired', null, array('required' => false))
