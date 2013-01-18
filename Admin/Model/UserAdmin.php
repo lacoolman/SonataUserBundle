@@ -36,7 +36,7 @@ class UserAdmin extends AbstractAdmin
             ->add('username')
             ->add('email')
             ->add('groups', 'string', ['template' => 'SonataAdminBundle::CRUD/list__groups_filter.html.twig'])
-            ->add('enabled')
+            ->add('enabled', null, ['label' => 'Доступ'])
 //            ->add('locked')
             ->add('createdAt')
             ->add('_action', 'actions', ['label' => 'Действия',
@@ -136,6 +136,10 @@ class UserAdmin extends AbstractAdmin
         if (!$this->editSelf() && !$this->user->hasRole('ROLE_ADMIN')) {
             throw new AccessDeniedException();
         }
+
+        $enabled = $this->getSubject()->getId() ? $this->getSubject()->isEnabled() : true;
+        $this->getSubject()->setEnabled($enabled);
+        
         $formMapper
             ->with('Справочник пользователя')
                 ->add('username', null, array('read_only' => !$this->user->hasRole('ROLE_ADMIN')))
@@ -167,7 +171,7 @@ class UserAdmin extends AbstractAdmin
 //                ))
 //                ->add('locked', null, array('required' => false))
 //                ->add('expired', null, array('required' => false))
-                ->add('enabled', null, array('required' => false))
+                ->add('enabled', null, array('required' => false, 'label' => 'Доступ'))
 //                ->add('credentialsExpired', null, array('required' => false))
             ;
         }
