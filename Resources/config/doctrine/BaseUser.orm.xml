@@ -18,6 +18,7 @@
         <field name="locale"       type="string"     column="locale"    length="8"     nullable="true" />
         <field name="timezone"     type="string"     column="timezone"  length="64"    nullable="true" />
         <field name="phone"        type="string"     column="phone"     length="64"    nullable="true" />
+	<field name="sessionId"    type="string"     columt="session_id" length="255"  nullable="true" />
         <field name="deleted"      type="boolean"    column="deleted"/>
         <!-- social fields -->
         <field name="facebookUid"     type="string"     column="facebook_uid"  length="255"    nullable="true" />

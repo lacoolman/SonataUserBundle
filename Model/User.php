@@ -132,6 +132,16 @@ abstract class User extends AbstractedUser implements UserInterface, \IronSoft\A
 
     protected $failLoginCount;
 
+    protected $sessionId;
+
+    public function setSessionId($sessionId) {
+        $this->sessionId = $sessionId;
+    }
+
+    public function getSessionId() {
+        return $this->sessionId;
+    }
+
     /**
      * @var bool $deleted
      */
