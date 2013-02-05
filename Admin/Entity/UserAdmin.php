@@ -23,5 +23,9 @@ class UserAdmin extends BaseUserAdmin
 
         return $query;
     }
+
+    public function getLabel() {
+        return "Пользователи";
+    }
 }
  
