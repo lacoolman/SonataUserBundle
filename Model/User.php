@@ -125,6 +125,16 @@ abstract class User extends AbstractedUser implements UserInterface, \IronSoft\A
      */
     protected $gplusName;
 
+    protected $position;
+
+    public function setPosition($position) {
+        $this->position = $position;
+    }
+
+    public function getPosition() {
+        return $this->position;
+    }
+
     /**
      * @var string
      */

@@ -36,7 +36,9 @@ class UserAdmin extends AbstractAdmin
             ->add('username')
             ->add('email')
             ->add('groups', 'string', ['template' => 'SonataAdminBundle::CRUD/list__groups_filter.html.twig'])
+            ->add('position', null, ['label' => 'Должность'])
             ->add('enabled', null, ['label' => 'Доступ'])
+
 //            ->add('locked')
             ->add('createdAt')
             ->add('_action', 'actions', ['label' => 'Действия',
@@ -154,6 +156,7 @@ class UserAdmin extends AbstractAdmin
 //                ->add('dateOfBirth', 'date', array('required' => false))
                 ->add('firstname', null, array('required' => false))
                 ->add('lastname', null, array('required' => false))
+                ->add('position', null, ['label' => 'Должность'])
                 ->add('website', 'url', array('required' => false))
 //                ->add('biography', 'text', array('required' => false))
 //                ->add('gender', null, array('required' => false))
