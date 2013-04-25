@@ -146,7 +146,17 @@ class UserAdmin extends AbstractAdmin
             ->with('Справочник пользователя')
                 ->add('username', null, array('read_only' => !$this->user->hasRole('ROLE_ADMIN')))
                 ->add('email')
-                ->add('plainPassword', 'password', array('required' => false));
+                ->add('plainPassword', 'repeated', array(
+                    'required' => false,
+                    'first_name' => 'password',
+                    'second_name' => 'confirm_password',
+                    'type' => 'password',
+                    'invalid_message' => 'Пароли должны совпадать',
+                    'error_bubbling' => true,
+                    'options' => array('label' => 'Пароль')
+                )
+            );
+        $formMapper->get('plainPassword')->get('confirm_password')->setAttribute('label', 'Повторите пароль');
         if ($this->user->hasRole('ROLE_ADMIN')) {
             $formMapper
                 ->with('Справочник пользователя')
