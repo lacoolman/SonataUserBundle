@@ -33,12 +33,12 @@ class UserAdmin extends AbstractAdmin
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
-            ->add('username')
-            ->add('email')
             ->add('firstname')
             ->add('lastname')
-            ->add('groups', 'string', ['template' => 'SonataAdminBundle::CRUD/list__groups_filter.html.twig'])
             ->add('position', null, ['label' => 'Должность'])
+            ->add('username')
+            ->add('email')
+            ->add('groups', 'string', ['template' => 'SonataAdminBundle::CRUD/list__groups_filter.html.twig'])
             ->add('enabled', null, ['label' => 'Доступ'])
 
 //            ->add('locked')
