@@ -33,16 +33,16 @@ class UserAdmin extends AbstractAdmin
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
-            ->add('firstname')
-            ->add('lastname')
+            ->add('firstname', null, ['label' => 'Имя'])
+            ->add('lastname', null, ['label' => 'Фамилия'])
             ->add('position', null, ['label' => 'Должность'])
-            ->add('username')
-            ->add('email')
-            ->add('groups', 'string', ['template' => 'SonataAdminBundle::CRUD/list__groups_filter.html.twig'])
+            ->add('username', null, ['label' => 'Имя пользователя'])
+            ->add('email', null, ['label' => 'Электроный адрес'])
+            ->add('groups', 'string', ['label' => 'Группы', 'template' => 'SonataAdminBundle::CRUD/list__groups_filter.html.twig'])
             ->add('enabled', null, ['label' => 'Доступ'])
 
 //            ->add('locked')
-            ->add('createdAt')
+            ->add('createdAt', null, ['label' => 'Дата создания'])
             ->add('_action', 'actions', ['label' => 'Действия',
                 'actions' => [
                     'edit' => [],
@@ -118,7 +118,8 @@ class UserAdmin extends AbstractAdmin
             ->assertSonataModel()
             ->end()
             ->with('username')
-            ->assertNotBlank()
+                ->assertNotBlank()
+//                ->assertRegex(['pattern' => '/[A-Za-z\d]*[A-Za-z][A-Za-z\d]*/'])
             ->end()
             ->with('email')
             ->assertEmail()
@@ -130,7 +131,7 @@ class UserAdmin extends AbstractAdmin
                 ->assertNotBlank()
                 ->end();
         }
-    }
+    }//[A-Za-z\d]*[A-Za-z][A-Za-z\d]*
 
     /**
      * {@inheritdoc}
