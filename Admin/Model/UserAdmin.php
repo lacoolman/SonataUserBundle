@@ -131,6 +131,26 @@ class UserAdmin extends AbstractAdmin
                 ->assertNotBlank()
                 ->end();
         }
+
+        //TODO UniqueEntity
+
+        $users = $this->getEntityManager()->getRepository($this->getClass())->findByUsername($this->subject->getUsername());
+        $userId = $this->getSubject()->getId();
+        foreach ($users as $user) {
+            if ($user->getId() != $userId) {
+                $errorElement->with('username')->addViolation('Пользователь с таким именем уже существует');
+                return;
+            }
+        }
+
+        $users = $this->getEntityManager()->getRepository($this->getClass())->findByEmail($this->subject->getEmail());
+        $userId = $this->getSubject()->getId();
+        foreach ($users as $user) {
+            if ($user->getId() != $userId) {
+                $errorElement->with('email')->addViolation('Пользователь с таким e-mail уже существует');
+                return;
+            }
+        }
     }//[A-Za-z\d]*[A-Za-z][A-Za-z\d]*
 
     /**
@@ -231,6 +251,15 @@ class UserAdmin extends AbstractAdmin
     private function editSelf() {
         $this->user = $this->getConfigurationPool()->getContainer()->get('security.context')->getToken()->getUser();
         return $this->user->getId() == $this->getSubject()->getId();
+    }
+
+    public function getExportFields()
+    {
+        $exportFields = parent::getExportFields();
+        unset($exportFields[array_search('groups', $exportFields)]);
+        $exportFields['Группы'] = 'groupLabels';
+
+        return $exportFields;
     }
 
     protected $label = 'Пользователи';
