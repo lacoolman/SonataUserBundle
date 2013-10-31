@@ -16,13 +16,6 @@ use Sonata\AdminBundle\Form\FormMapper;
 
 class UserAdmin extends BaseUserAdmin
 {
-    public function createQuery($context = 'list')
-    {
-        $query = $this->getModelManager()->createQuery($this->getClass(), 'o');
-        $query->where('o.deleted = false');
-
-        return $query;
-    }
 
     public function getLabel() {
         return "Пользователи";

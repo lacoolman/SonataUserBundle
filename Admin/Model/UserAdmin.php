@@ -132,25 +132,6 @@ class UserAdmin extends AbstractAdmin
                 ->end();
         }
 
-        //TODO UniqueEntity
-
-        $users = $this->getEntityManager()->getRepository($this->getClass())->findByUsername($this->subject->getUsername());
-        $userId = $this->getSubject()->getId();
-        foreach ($users as $user) {
-            if ($user->getId() != $userId) {
-                $errorElement->with('username')->addViolation('Пользователь с таким именем уже существует');
-                return;
-            }
-        }
-
-        $users = $this->getEntityManager()->getRepository($this->getClass())->findByEmail($this->subject->getEmail());
-        $userId = $this->getSubject()->getId();
-        foreach ($users as $user) {
-            if ($user->getId() != $userId) {
-                $errorElement->with('email')->addViolation('Пользователь с таким e-mail уже существует');
-                return;
-            }
-        }
     }//[A-Za-z\d]*[A-Za-z][A-Za-z\d]*
 
     /**
@@ -227,6 +208,19 @@ class UserAdmin extends AbstractAdmin
         $this->getUserManager()->updateCanonicalFields($user);
         $this->getUserManager()->updatePassword($user);
     }
+
+    public function preRemove($object)
+    {
+        parent::preRemove($object);
+        foreach ($object->getEvents() as $event) {
+            $event->setUser(null);
+        }
+
+        foreach ($object->getInputReports() as $report) {
+            $report->removeUserAllowed($object);
+        }
+    }
+
 
     /**
      * @param UserManagerInterface $userManager

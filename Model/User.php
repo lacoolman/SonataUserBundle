@@ -19,7 +19,7 @@ use IronSoft\Analytics\ISBundle\Entity\SoftDeletable\TraitSoftDeletable;
 /**
  * Represents a User model
  */
-abstract class User extends AbstractedUser implements UserInterface, \IronSoft\Analytics\ISBundle\Entity\SoftDeletable\SoftDeleteableInterface
+abstract class User extends AbstractedUser implements UserInterface
 {
 
     //use TraitSoftDeletable;
@@ -150,20 +150,6 @@ abstract class User extends AbstractedUser implements UserInterface, \IronSoft\A
 
     public function getSessionId() {
         return $this->sessionId;
-    }
-
-    /**
-     * @var bool $deleted
-     */
-    protected $deleted = false;
-
-
-    public function delete() {
-        $this->deleted = true;
-    }
-
-    public function isDeleted() {
-        return $this->deleted;
     }
 
     /**
