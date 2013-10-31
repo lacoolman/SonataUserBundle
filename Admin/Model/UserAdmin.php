@@ -78,14 +78,12 @@ class UserAdmin extends AbstractAdmin
     protected function configureShowFields(ShowMapper $showMapper)
     {
         $showMapper
-            ->with('Справочник пользователей')
+            ->with('Пользователь')
                 ->add('username')
-                ->add('email')
-            ->end()
-            ->with('')
+                ->add('email', null, array('label' => 'E-mail'))
                 ->add('groups')
             ->end()
-            ->with('Profile')
+            ->with('Профиль')
 //                ->add('dateOfBirth', 'date')
                 ->add('firstname')
                 ->add('lastname')
@@ -147,23 +145,23 @@ class UserAdmin extends AbstractAdmin
         $this->getSubject()->setEnabled($enabled);
         
         $formMapper
-            ->with('Справочник пользователя')
+            ->with('Пользователь')
                 ->add('username', null, array('read_only' => !$this->user->hasRole('ROLE_ADMIN')))
-                ->add('email')
+                ->add('email', null, array('label' => 'E-mail'))
                 ->add('plainPassword', 'repeated', array(
                     'required' => false,
                     'first_name' => 'password',
                     'second_name' => 'confirm_password',
                     'type' => 'password',
                     'invalid_message' => 'Пароли должны совпадать',
-                    'error_bubbling' => true,
+                    'error_bubbling' => false,
                     'options' => array('label' => 'Пароль')
                 )
             );
         $formMapper->get('plainPassword')->get('confirm_password')->setAttribute('label', 'Повторите пароль');
         if ($this->user->hasRole('ROLE_ADMIN')) {
             $formMapper
-                ->with('Справочник пользователя')
+                ->with('Пользователь')
                 ->add('groups', 'sonata_type_model', array('required' => true));
         }
         $formMapper
