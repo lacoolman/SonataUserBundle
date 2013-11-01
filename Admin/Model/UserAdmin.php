@@ -37,7 +37,7 @@ class UserAdmin extends AbstractAdmin
             ->add('lastname', null, ['label' => 'Фамилия'])
             ->add('position', null, ['label' => 'Должность'])
             ->add('username', null, ['label' => 'Имя пользователя'])
-            ->add('email', null, ['label' => 'Электроный адрес'])
+            ->add('email', null, ['label' => 'E-mail'])
             ->add('groups', 'string', ['label' => 'Группы', 'template' => 'SonataAdminBundle::CRUD/list__groups_filter.html.twig'])
             ->add('enabled', null, ['label' => 'Доступ'])
 
@@ -142,6 +142,7 @@ class UserAdmin extends AbstractAdmin
         }
 
         $enabled = $this->getSubject()->getId() ? $this->getSubject()->isEnabled() : true;
+        $require = $this->getSubject()->getId() ? '' : ' *';
         $this->getSubject()->setEnabled($enabled);
         
         $formMapper
@@ -155,10 +156,10 @@ class UserAdmin extends AbstractAdmin
                     'type' => 'password',
                     'invalid_message' => 'Пароли должны совпадать',
                     'error_bubbling' => false,
-                    'options' => array('label' => 'Пароль')
+                    'options' => array('label' => 'Пароль' . $require)
                 )
             );
-        $formMapper->get('plainPassword')->get('confirm_password')->setAttribute('label', 'Повторите пароль');
+        $formMapper->get('plainPassword')->get('confirm_password')->setAttribute('label', 'Повторите пароль' . $require);
         if ($this->user->hasRole('ROLE_ADMIN')) {
             $formMapper
                 ->with('Пользователь')
