@@ -5,7 +5,7 @@
 
     <parameters>
         <!-- USER -->
-        <parameter key="sonata.user.admin.user.class">Sonata\UserBundle\Admin\Entity\UserAdmin</parameter>
+        <parameter key="sonata.user.admin.user.class">IronSoft\Analytics\ISBundle\Admin\Security\UserAdmin</parameter>
         <parameter key="sonata.user.admin.user.controller">IronSoftAnalyticsISBundle:Admin\AjaxCRUD</parameter>
         <parameter key="sonata.user.admin.user.translation_domain">SonataUserBundle</parameter>
 
